@@ -26,6 +26,7 @@ class AppRoutes(private val studentHandler: StudentHandler,
                     GET("/{id}/scores/{session}", studentHandler::getStudentScoresForSession)
                 }
                 ("/scores").nest {
+                    GET("/{scoreId}", scoreHandler::getScoreById)
                     POST("/{scoreId}", scoreHandler::updateStudentScore)
                 }
             }
