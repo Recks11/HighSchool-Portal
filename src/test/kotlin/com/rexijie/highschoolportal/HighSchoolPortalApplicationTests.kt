@@ -12,5 +12,4 @@ class HighSchoolPortalApplicationTests {
 	@Test
 	fun contextLoads() {
 	}
-
 }

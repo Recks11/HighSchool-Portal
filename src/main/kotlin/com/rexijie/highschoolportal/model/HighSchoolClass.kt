@@ -11,7 +11,7 @@ import java.util.UUID
 data class HighSchoolClass(
         @Id val id: String = UUID.randomUUID().toString(),
         val name: String,
-        @DBRef(lazy = true) val subjects: Array<Subject>
+        @DBRef(lazy = true) val subjects: MutableList<Subject>
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

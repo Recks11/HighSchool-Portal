@@ -6,8 +6,7 @@ import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.test.web.reactive.server.expectBodyList
 
-class IntegrationTests {
-
+class AppRoutesTest {
     val testClient =  WebTestClient
         .bindToServer()
             .baseUrl("http://localhost:8080/api/v1")

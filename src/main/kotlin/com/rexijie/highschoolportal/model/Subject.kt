@@ -9,5 +9,5 @@ data class Subject(
         @Id val id: String = UUID.randomUUID().toString(),
         val name: String,
         val level: Level,
-        val branch: Branch
+        val branch: Branch?
 )
