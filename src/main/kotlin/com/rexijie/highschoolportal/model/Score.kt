@@ -11,9 +11,14 @@ data class Score(
         @DBRef(lazy = true) val subject: Subject?,
         val term: Int,
         val session: String,
-        val firstTest: Int = 0,
-        val secondTest: Int = 0,
-        val exam: Int = 0,
-        val assignment: Int = 0,
-        val total: Int = firstTest + secondTest + exam + assignment
-)
+        var firstTest: Int = 0,
+        var secondTest: Int = 0,
+        var exam: Int = 0,
+        var assignment: Int = 0,
+        var total: Int = firstTest + secondTest + exam + assignment
+) {
+    fun calculateTotal() {
+        total = firstTest + secondTest + exam + assignment
+        if (total > 100) total = 100
+    }
+}

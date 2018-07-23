@@ -1,6 +1,7 @@
 package com.rexijie.highschoolportal.web.api.v1
 
 import com.rexijie.highschoolportal.web.api.v1.handlers.ErrorHandler
+import com.rexijie.highschoolportal.web.api.v1.handlers.ScoreHandler
 import com.rexijie.highschoolportal.web.api.v1.handlers.StudentHandler
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -10,7 +11,8 @@ import org.springframework.web.reactive.function.server.ServerResponse
 import org.springframework.web.reactive.function.server.router
 
 @Configuration
-class AppRoutes(private val studentHandler: StudentHandler) {
+class AppRoutes(private val studentHandler: StudentHandler,
+                private val scoreHandler: ScoreHandler) {
 
     @Bean
     fun applicationRoutes(): RouterFunction<ServerResponse> {
@@ -20,12 +22,17 @@ class AppRoutes(private val studentHandler: StudentHandler) {
                     GET("/", studentHandler::getAllStudents)
                     POST("/", studentHandler::saveStudent)
                     GET("/{id}", studentHandler::getStudentByID)
+                    GET("/{id}/scores", studentHandler::getScoresForStudent)
+                    GET("/{id}/scores/{session}", studentHandler::getStudentScoresForSession)
+                }
+                ("/scores").nest {
+                    POST("/{scoreId}", scoreHandler::updateStudentScore)
                 }
             }
         }.filter { //Error Handling using a filter
             request, next -> next.handle(request)
                 .onErrorResume {
-                    ErrorHandler().handleError(it)
+                    ErrorHandler(request).handleError(it)
                 }
         }
     }

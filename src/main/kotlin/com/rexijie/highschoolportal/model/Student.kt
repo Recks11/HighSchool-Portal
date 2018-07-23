@@ -1,5 +1,6 @@
 package com.rexijie.highschoolportal.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.DBRef
@@ -15,7 +16,7 @@ data class Student(@Id var id: String = UUID.randomUUID().toString(),
                    @JsonProperty("registrationnumber")var registrationNumber: String,
                    var sex: String,
                    var admissionDate: String,
-                   @DBRef(lazy = true) var scores: MutableList<Score>) {
+                   @JsonIgnore @DBRef(lazy = true) var scores: MutableList<Score>) {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

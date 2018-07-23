@@ -27,7 +27,7 @@ class IntegrationTests {
        testClient.get().uri("/student/id")
                .accept(MediaType.APPLICATION_JSON)
                .exchange()
-               .expectStatus().isNoContent
+               .expectStatus().isNotFound
                .expectBody().isEmpty
     }
 }
